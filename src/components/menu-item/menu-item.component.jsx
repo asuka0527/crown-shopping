@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import "./menu-item.styles.scss";
 
 // withRouter - is a function that return a component that has been modified inside that function
-// to pass props such as : history, location
+// to pass props such as : history, location,match
 
 const MenuItem = ({ title, imageUrl, size, history, linkUrl, match }) => (
   <div
