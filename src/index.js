@@ -6,20 +6,37 @@ import { BrowserRouter } from "react-router-dom";
 // redux
 //The <Provider /> makes the Redux store available to any nested components
 import { Provider } from "react-redux";
+
+// redux persist + react
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./redux/store";
+
 // redux store
-import store from "./redux/store";
+// import store from "./redux/store";
 
 import "./index.css";
 import App from "./App";
 
+// Redux persist
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );
+
+// ReactDOM.render(
+//   <Provider store={store}>
+//     <BrowserRouter>
+//       <App />
+//     </BrowserRouter>
+//   </Provider>,
+//   document.getElementById("root")
+// );
 
 //The <Provider /> makes the Redux store available to any nested
 // components that have been wrapped in the connect() function.
