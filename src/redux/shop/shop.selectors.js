@@ -21,9 +21,8 @@ export const selectShopCollections = createSelector(
 // AFTER DATA NORMALIZATION - converting an array to an object because it is more efficient
 
 export const selectCollection = (collectionUrlParam) =>
-  createSelector(
-    [selectShopCollections],
-    (collections) => collections[collectionUrlParam]
+  createSelector([selectShopCollections], (collections) =>
+    collections ? collections[collectionUrlParam] : null
   );
 
 // BEFORE NORMALIZATION
@@ -36,7 +35,9 @@ export const selectCollection = (collectionUrlParam) =>
 //   );
 
 // CONVERTING OUR OBJECT -> ARRAY to utitlize it for our CollectionOverview
+// [ UTILIZED converted SHOP DATA from firebase ] 2).
 export const selectCollectionsForPreview = createSelector(
   [selectShopCollections],
-  (collections) => Object.keys(collections).map((key) => collections[key])
+  (collections) =>
+    collections ? Object.keys(collections).map((key) => collections[key]) : []
 );

@@ -18,10 +18,16 @@ import { createStructuredSelector } from "reselect";
 import { auth, createUserProfileDocument } from "./firebase/firebase.utils";
 import { selectCurrentUser } from "./redux/user/user.selector";
 
+// [Moving our data -> firestore] -- 1). imports
+// import { addCollectionAndDocuments } from "./firebase/firebase.utils";
+// import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
+
 class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
+    // ddestructure from props
+    //  [Moving our data -> firestore] -- 3).
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
@@ -41,6 +47,16 @@ class App extends React.Component {
 
       // if users signs out return currentuser to null
       setCurrentUser(userAuth);
+
+      // [Moving our data -> firestore] -- 4). pass "collections" as key and the collections [] to our created firebase utils function
+      // only extract data we need from our objects
+
+      //[Moving our data -> firestore] -- 5). delete code because we only want to store our collections ONCE
+
+      // addCollectionAndDocuments(
+      //   "collections",
+      //   collectionsArray.map(({ title, items }) => ({ title, items }))
+      // );
     });
   }
 
@@ -74,6 +90,8 @@ class App extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   currentUser: selectCurrentUser,
+  // [Moving our data -> firestore] -- 2). select collections [] using our selector
+  // collectionsArray: selectCollectionsForPreview,
 });
 
 const mapDispatchToProps = (dispatch) => ({
