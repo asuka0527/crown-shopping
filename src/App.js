@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { useEffect } from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
@@ -21,6 +20,9 @@ import { checkUserSession } from "./redux/user/user.actions";
 // import { addCollectionAndDocuments } from "./firebase/firebase.utils";
 // import { selectCollectionsForPreview } from "./redux/shop/shop.selectors";
 
+import { GlobalStyle } from "./global.styles";
+import AboutPage from "./pages/about/about.component";
+
 const App = ({ checkUserSession, currentUser }) => {
   useEffect(() => {
     checkUserSession();
@@ -39,11 +41,13 @@ const App = ({ checkUserSession, currentUser }) => {
   // }
   return (
     <div>
+      <GlobalStyle />
       <Header />
       <Switch>
         <Route exact path="/" component={Homepage} />
         <Route path="/shop" component={ShopPage} />
         <Route exact path="/checkout" component={CheckoutPage} />
+        <Route exact path="/about" component={AboutPage} />
         <Route
           path="/signin"
           render={() =>

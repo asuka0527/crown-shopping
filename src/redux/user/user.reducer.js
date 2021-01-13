@@ -1,5 +1,4 @@
 import UserActionTypes from "./user.types";
-import { auth } from "../../firebase/firebase.utils";
 
 // default value
 const INITIAL_STATE = {
